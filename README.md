@@ -11,16 +11,32 @@ The PaaS Unified Library is a layer of abstraction over the libraries provided b
 * dump database
 * restore database
 
-It was extracted from Cloud4SOA project.
+The library was extracted from Cloud4SOA project.
 
-### Components ###
+### Main Components ###
 
 The library is comprised of the following components:
 
-* api: interface to the client programmer.
-* api implementer (ems): orchestrator; forwards the operations to local or remote adapters, accordingly.
-* remote adapters: Remote adapters are webapps with a REST interface that are in charge of executing the operations for a single PaaS. There are remote adapters for CloudBees and CloudFoundry.
-* local adapter: some operations (deploy, dump & restore database) can't be done in a remote adapter, where there is no confidence of having full control over the system.
+* IExecutionManagementService (IEMS): interface to the client programmer. 
+* ExecutionManagementServiceModule (EMS): Implements the IEMS interface. Can be seen as an orchestrator; forwards the operations to local or remote adapters, accordingly.
+* Remote adapters: Remote adapters are webapps with a REST interface that are in charge of executing the operations for a single PaaS. There are remote adapters for CloudBees and CloudFoundry.
+* Local adapter: some operations (deploy, dump & restore database) can't be done in a remote adapter, where there is no confidence of having full control over the system. 
+
+### Subprojects ###
+
+There are the following subprojects:
+
+* parent: the main subproject.
+* governance-ems: contains the code of IEMS and EMS.
+* adapter: contains the code of the local adapter, including libraries to connect to cloud providers. The local adapter class is cloudadapter.Adapter.
+* adapter-REST: client code needed to connect to remote adapters.
+* api: classes/interfaces used by several projects.
+* RemoteAdapters: where the remote adapters are. Each one has to be compiled independently.
+
+### Usage ###
+
+The IEMS interface contains the available operations. Take a look at governance-ems/eu.cloud4soa.governance.ems.EmsTest 
+for an example on how to use the library.
 
 ### Differences with Cloud4SOA ###
 
@@ -56,6 +72,8 @@ We are skipping tests because it needs the requested adapter up.
 
 ### Testing ###
 We will execute governance-ems tests
+
+You will need an acoount in a cloud provider. Go to cloudbees.com and get a free account.
 
 The first step is to place the right credentials in ./governance-ems/src/test/resources/conf/credentials.properties
 
