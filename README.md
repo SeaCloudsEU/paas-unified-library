@@ -31,7 +31,7 @@ There are the following subprojects:
 * adapter: contains the code of the local adapter, including libraries to connect to cloud providers. The local adapter class is cloudadapter.Adapter.
 * adapter-REST: client code needed to connect to remote adapters.
 * api: classes/interfaces used by several projects.
-* RemoteAdapters: where the remote adapters are. Each one has to be compiled independently.
+* RemoteAdapters: where the remote adapters are. Each one has to be compiled independently. The REST service class is  c4soa.adapter.Adapter in each remote adapter.
 
 ### Usage ###
 
